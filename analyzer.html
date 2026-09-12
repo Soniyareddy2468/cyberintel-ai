@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Email Analyzer | CyberIntel AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">🛡️</div>
+
+            <div>
+                <h2>CyberIntel</h2>
+                <span>AI Security Platform</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="index.html" class="nav-item">
+                <span>📊</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="analyzer.html" class="nav-item active">
+                <span>📧</span>
+                <span>Email Analyzer</span>
+            </a>
+
+            <a href="forensics.html" class="nav-item">
+                <span>🔍</span>
+                <span>Forensics</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>🌐</span>
+                <span>Threat Intelligence</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>🚨</span>
+                <span>Incidents</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>AI Engine Online</strong>
+                    <small>Ready for analysis</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">AI THREAT DETECTION</p>
+
+                <h1>Email Threat Analyzer</h1>
+
+            </div>
+
+            <div class="live-indicator">
+                <span></span>
+                AI ENGINE READY
+            </div>
+
+        </header>
+
+
+        <!-- ANALYZER INPUT -->
+
+        <section class="analyzer-layout">
+
+            <div class="panel analyzer-input">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="eyebrow">STEP 01</p>
+
+                        <h3>Submit Suspicious Email</h3>
+
+                    </div>
+
+                    <span class="badge badge-info">
+                        SECURE ANALYSIS
+                    </span>
+
+                </div>
+
+
+                <label for="senderEmail">
+                    Sender Email
+                </label>
+
+                <input
+                    type="email"
+                    id="senderEmail"
+                    placeholder="example@company.com"
+                >
+
+
+                <label for="emailSubject">
+                    Email Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="emailSubject"
+                    placeholder="Enter email subject"
+                >
+
+
+                <label for="emailContent">
+                    Email Content
+                </label>
+
+                <textarea
+                    id="emailContent"
+                    rows="14"
+                    placeholder="Paste the suspicious email content here..."
+                ></textarea>
+
+
+                <div class="input-help">
+
+                    <span>🔒</span>
+
+                    <p>
+                        For this prototype, analysis happens locally
+                        in your browser. Do not paste confidential
+                        information into a public demo.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-button analyze-button"
+                    id="analyzeButton"
+                    onclick="analyzeEmail()"
+                >
+                    🔍 Analyze Email
+                </button>
+
+
+                <div
+                    id="loadingState"
+                    class="loading-state hidden"
+                >
+
+                    <div class="spinner"></div>
+
+                    <span>
+                        AI engine analyzing email...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK INFO -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="eyebrow">ANALYSIS ENGINE</p>
+
+                        <h3>Detection Capabilities</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="capability-list">
+
+                    <div class="capability">
+                        <span>🎣</span>
+                        <div>
+                            <strong>Phishing Detection</strong>
+                            <p>Identifies suspicious social-engineering patterns.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="capability">
+                        <span>🔗</span>
+                        <div>
+                            <strong>URL Analysis</strong>
+                            <p>Detects suspicious links and domains.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="capability">
+                        <span>👤</span>
+                        <div>
+                            <strong>Sender Analysis</strong>
+                            <p>Checks sender reputation indicators.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="capability">
+                        <span>🧠</span>
+                        <div>
+                            <strong>Social Engineering</strong>
+                            <p>Detects urgency, threats and manipulation.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="capability">
+                        <span>🌍</span>
+                        <div>
+                            <strong>Geolocation</strong>
+                            <p>Maps suspicious IP addresses approximately.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTS -->
+
+        <section
+            id="analysisResult"
+            class="hidden"
+        >
+
+            <div class="section-title">
+
+                <div>
+
+                    <p class="eyebrow">
+                        STEP 02
+                    </p>
+
+                    <h2>
+                        AI Analysis Result
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- SCORE -->
+
+            <div class="result-grid">
+
+                <div class="panel score-result-panel">
+
+                    <p class="eyebrow">
+                        OVERALL THREAT SCORE
+                    </p>
+
+                    <div class="big-score">
+
+                        <div
+                            id="resultScoreCircle"
+                            class="score-circle result-circle"
+                        >
+
+                            <div>
+
+                                <strong id="resultScore">
+                                    0
+                                </strong>
+
+                                <span>/100</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <h3
+                        id="riskLevel"
+                        class="risk-level"
+                    >
+                        Analyzing...
+                    </h3>
+
+                    <p id="riskDescription">
+                        Analysis result will appear here.
+                    </p>
+
+                </div>
+
+
+                <!-- METRICS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <p class="eyebrow">
+                                AI METRICS
+                            </p>
+
+                            <h3>
+                                Threat Indicators
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric-list">
+
+                        <div class="metric">
+
+                            <div class="metric-top">
+
+                                <span>
+                                    Phishing Probability
+                                </span>
+
+                                <strong id="phishingScore">
+                                    0%
+                                </strong>
+
+                            </div>
+
+                            <div class="progress-line">
+                                <div
+                                    id="phishingProgress"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <div class="metric-top">
+
+                                <span>
+                                    URL Risk
+                                </span>
+
+                                <strong id="urlScore">
+                                    0%
+                                </strong>
+
+                            </div>
+
+                            <div class="progress-line">
+                                <div
+                                    id="urlProgress"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <div class="metric-top">
+
+                                <span>
+                                    Sender Risk
+                                </span>
+
+                                <strong id="senderScore">
+                                    0%
+                                </strong>
+
+                            </div>
+
+                            <div class="progress-line">
+                                <div
+                                    id="senderProgress"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <div class="metric-top">
+
+                                <span>
+                                    Social Engineering
+                                </span>
+
+                                <strong id="socialScore">
+                                    0%
+                                </strong>
+
+                            </div>
+
+                            <div class="progress-line">
+                                <div
+                                    id="socialProgress"
+                                    style="width:0%"
+                                ></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTION -->
+
+            <div class="panel recommendation-panel">
+
+                <div class="recommendation-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <p class="eyebrow">
+                        SMART AUTOMATION
+                    </p>
+
+                    <h3>
+                        Recommended Action
+                    </h3>
+
+                    <p id="recommendation">
+                        Awaiting analysis...
+                    </p>
+
+                </div>
+
+                <div
+                    id="actionBadge"
+                    class="badge badge-warning"
+                >
+                    MONITOR
+                </div>
+
+            </div>
+
+
+            <!-- IOCs -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            FORENSIC EXTRACTION
+                        </p>
+
+                        <h3>
+                            Indicators of Compromise
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ioc-grid">
+
+                    <div class="ioc-card">
+
+                        <span>📧</span>
+
+                        <div>
+
+                            <small>Sender</small>
+
+                            <strong id="iocSender">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ioc-card">
+
+                        <span>🔗</span>
+
+                        <div>
+
+                            <small>URLs Detected</small>
+
+                            <strong id="iocUrls">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ioc-card">
+
+                        <span>🌐</span>
+
+                        <div>
+
+                            <small>IP Addresses</small>
+
+                            <strong id="iocIps">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ioc-card">
+
+                        <span>⚠️</span>
+
+                        <div>
+
+                            <small>Suspicious Keywords</small>
+
+                            <strong id="iocKeywords">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="footer">
+
+            <span>CyberIntel AI © 2026</span>
+
+            <span>
+                Defensive security research platform
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="js/analyzer.js"></script>
+
+</body>
+
+</html>
